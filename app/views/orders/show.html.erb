@@ -1,0 +1,18 @@
+<h1> Orders </h1>
+
+<div style="display: grid; grid-template-columns: 1fr 1fr 1fr;">
+
+    <div>
+      <h2> Order: </h2>
+      <p> Order #: <%= @order.id %> </p>
+      <p> Created at: <%= @order.created_at %> </p>
+      <p> Amount: <%= @order.amount %> </p>
+      <h2> Item: </h2>
+
+      <p> <%= @item.name %></p>
+      <p> <%= @item.description %></p>
+      <p> Price: <%= @item.price %></p>
+    </div>
+
+
+</div>

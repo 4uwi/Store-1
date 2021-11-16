@@ -1,0 +1,18 @@
+<h1> Items </h1>
+
+<div style="display: grid; grid-template-columns: 1fr 1fr 1fr;">
+  <% @items.each do |item| %>
+    <div>
+    <h2> <%= item.name %> </h2>
+    <h2> <%= item.description %> </h2>
+    <h2> <%= item.price %> </h2>
+    <% if user_signed_in? %>
+        <%= link_to 'Buy', new_order_path(item) %>
+    <% if current_user.admin? %>
+         | <%= link_to 'Edit', edit_item_path(item) %> |
+        <%= link_to 'Delete', item_path(item), data: {method: :delete, confirm: 'Delete item?'} %>
+    <% end %>
+        <% end %>
+    </div>
+  <% end %>
+</div>

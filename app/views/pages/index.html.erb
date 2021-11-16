@@ -1,0 +1,7 @@
+<% if user_signed_in? %>
+  <h1> <%= current_user.first_name %>   </h1>
+<% else %>
+  <h1> Welcome </h1>
+<% end %>
+
+<p style="position: absolute; bottom: 5px;"> &copy; @trashtalketernal <%= Time.now.year %> </p>

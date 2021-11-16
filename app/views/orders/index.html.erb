@@ -1,0 +1,16 @@
+<h1> Orders </h1>
+
+<div style="display: grid; grid-template-columns: 1fr 1fr 1fr;">
+  <% @orders.each do |order| %>
+    <div style="border: black 1px solid;padding: 5px;">
+
+      <h2> Id: <%= order.id %> </h2>
+      <h2> Date: <%= order.created_at %> </h2>
+      <h2> Amount: <%= order.amount %> </h2>
+      <p>
+        <%= link_to "Open", order_path(order) %>
+      </p>
+    </div>
+  <% end %>
+
+</div>

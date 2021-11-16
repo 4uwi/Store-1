@@ -1,0 +1,23 @@
+<%= form_with model: @item do |f| %>
+
+  <div class="test">
+    <%= f.label :Name %>
+      <%= f.text_field :name, required: true, placeholed: "Name" %>
+
+  </div>
+
+  <div class="test">
+    <%= f.label :description %>
+      <%= f.text_area :description, required: true, placeholed: "Description" %>
+
+  </div>
+
+  <div class="test">
+    <%= f.label :price %>
+      <%= f.text_field :price, required: true, placeholed: "Price" %>
+
+  </div>
+
+<%= f.submit "Save item!" %>
+
+<% end %>

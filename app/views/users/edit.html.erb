@@ -1,0 +1,58 @@
+<h2>Edit <%= @user.first_name %></h2>
+
+<%= form_for(@user) do |f| %>
+  <%= render "devise/shared/error_messages", resource: @user %>
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autocomplete: "email" %>
+  </div>
+
+  <% if Devise.mappings[:user].confirmable? && @user.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= @user.unconfirmed_email %></div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+    <%= f.password_field :password, autocomplete: "new-password" %>
+    <% if @minimum_password_length %>
+      <br />
+      <em><%= @minimum_password_length %> characters minimum</em>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+    <%= f.password_field :current_password, autocomplete: "current-password" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name, autofocus: true, autocomplete: "first-name" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name, autocomplete: "last-name" %>
+  </div>
+
+  <div class="actions">
+    <%= f.label "Admins privileges:" %>
+    <%= f.button link_to 'Make Admin', edit_admin_path%>
+  </div>
+
+  <div class="actions">
+    <%= f.button "Update" %>
+  </div>
+<% end %>
+
+<h3>Cancel this account</h3>
+
+<p>Really want to do this? <%= button_to "Cancel this account", user_path(@user), data: { confirm: "Are you sure?" }, method: :delete %></p>
+
+<%= link_to "Back", :back %>

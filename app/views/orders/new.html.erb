@@ -1,0 +1,58 @@
+<h1> New order </h1>
+
+<script>
+    function changeAmount(price)
+    {
+        a = document.getElementById("_order_description_quantity")
+        b = document.getElementById("amount")
+        b.value = a.value*price
+    }
+
+    function payout(){
+        b = document.getElementById("_order_description_quantity")
+        if (b.value != ""){
+          document.getElementById("payment").defaultValue = "Payed"
+          b.setAttribute("readonly", true)
+          document.getElementById("submit_order").disabled = false}
+        else{
+            document.getElementById("payment").defaultValue = "Enter amount"
+        }
+
+    }
+</script>
+
+<%= form_with model: @order do |f| %>
+
+  <div class="test">
+    <%= f.label "item:"%>
+    <%= @item.name %>
+  </div>
+
+  <div class="test">
+    <%= f.label "price:"%>
+    <%= @item.price %>
+  </div>
+
+  <%= f.fields_for :order_description do |ff| %>
+    <div class="field">
+      <%= ff.label :quantity %>
+      <%= ff.number_field :quantity, in: 1 .. 999, step: 1, onchange: "changeAmount(#{@item.price})", required: true%>
+    </div>
+    <div class="field">
+      <%= ff.hidden_field :item_id, value: @item.id %>
+    </div>
+    <div id="payment-tag">
+      <%= submit_tag "Pay", :type => "button", :onclick => "payout()", :id => "payment"%>
+    </div>
+
+    <div class="test">
+      <%= f.label "Amount" %>
+      <%= f.number_field :amount , step: 1 , :readonly => true, required: true%>
+    </div>
+
+  <% end %>
+  <%= f.submit "Submit" , :disabled => true, :id => "submit_order"%>
+
+<% end %>
+
+
